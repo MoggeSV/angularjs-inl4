@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body ng-controller="angularController">
 
     <!-- Header -->
     <header>
@@ -164,7 +164,7 @@
                 <!-- Sorting -->
 
                 <div class="sortSearch">
-                    <div class="row justify-content-between" ng-controller="buttonColorController">
+                    <div class="row justify-content-between">
                         <div class="row">
                             <div ng-class="{'gridButtonActive': cardActive, 'gridButton': !cardActive }">
                                 <a href="#!/"><i class="fas fa-th" ng-click="cardActive = true"></i></a>
@@ -175,9 +175,15 @@
                         </div>
 
                         
-                        <div class="mt-3">
+                        <!-- <div class="mt-3">
                             <select class="sortButton p-2" ng-model="rowLimit.value" ng-options="v for v in rowLimit.values"></select>
-                        </div>
+                        </div> -->
+                        <select name="rowLimit" class="sortButton p-2" ng-model="rowLimit">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
 
 
 
@@ -187,10 +193,13 @@
                                 Sort By <i class="fas fa-angle-down"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                ng-controller="sortController" ng-model="$root.sortColumn">
-                                <option class="dropdown-item" ng-click="sortData('name')">Product</option>
-                                <option class="dropdown-item" ng-click="sortData('price')">Price</option>
-                                <option class="dropdown-item" ng-click="sortData('rating')">Rating</option>
+                                ng-model="sortColumn">
+                                <option class="dropdown-item" ng-click="sortData('+name')">Product (A-Z)</option>
+                                <option class="dropdown-item" ng-click="sortData('-name')">Product (Z-A)</option>
+                                <option class="dropdown-item" ng-click="sortData('+price')">Price (lowest - highest)</option>
+                                <option class="dropdown-item" ng-click="sortData('-price')">Price (highest - lowest)</option>
+                                <option class="dropdown-item" ng-click="sortData('+rating')">Rating (lowest - highest)</option>
+                                <option class="dropdown-item" ng-click="sortData('-rating')">Rating (highest - lowest)</option>
                             </div>
                         </div>
 
@@ -419,12 +428,7 @@
     
     <script src="models/products.js"></script>
     <script src="app.js"></script>
-    <script src="routes/routes.js"></script>
-    <script src="controllers/angularController.js"></script>
-    <script src="controllers/buttonColorController.js"></script>
-    <script src="controllers/ratingController.js"></script>
-    <script src="controllers/searchController.js"></script>
-    <script src="controllers/sortController.js"></script>
+    
 
 </body>
 
