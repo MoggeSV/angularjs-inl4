@@ -1,3 +1,4 @@
+
 var app = angular
     .module("angularApp", ["ngRoute"])
     
@@ -17,10 +18,12 @@ var app = angular
     
     })
     
-    .controller("angularController", function($scope) {
+    .controller("angularController", function($scope, $http) {
         
-        //Get products
-        $scope.products = products;
+        //Setting products
+        $http.get("http://localhost:5000/api/products")
+            .then((res) => $scope.products = res.data)
+        
 
         //Sets row limits
         $scope.rowLimit = 5;
@@ -36,11 +39,12 @@ var app = angular
 
         //Sorting products
         $scope.sortColumn = "-rating";
-        //$scope.reverseSort = true;
     
         $scope.sortData = function (sortBy) {
             $scope.sortColumn = sortBy;
         }
+
+
 
     })
     
